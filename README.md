@@ -84,4 +84,6 @@ hexo new page about
 
 ## License
 
-MIT 
+MIT
+
+719520.xyz
