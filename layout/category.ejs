@@ -1,0 +1,24 @@
+<div class="category-container">
+    <h1 class="category-title">分类: <%= page.category %></h1>
+    
+    <ul class="category-post-list">
+    <% page.posts.sort('date', -1).forEach(function(post){ %>
+        <li class="category-post-item">
+            <span class="category-post-date"><%= date(post.date, 'YYYY-MM-DD') %></span>
+            <a href="<%= url_for(post.path) %>" class="category-post-title"><%= post.title || '(无标题)' %></a>
+        </li>
+    <% }) %>
+    </ul>
+</div>
+
+<% if (page.total > 1) { %>
+<div class="pagination category-pagination">
+    <% if (page.prev) { %>
+    <a href="<%= url_for(page.prev_link) %>" class="prev-page">上一页</a>
+    <% } %>
+    
+    <% if (page.next) { %>
+    <a href="<%= url_for(page.next_link) %>" class="next-page">下一页</a>
+    <% } %>
+</div>
+<% } %> 

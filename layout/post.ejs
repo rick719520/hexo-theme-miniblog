@@ -1,0 +1,48 @@
+<article class="post-content">
+    <h1 class="post-title"><%= page.title %></h1>
+    <div class="post-meta">
+        <span class="post-date">发布于 <%= date(page.date, "YYYY-MM-DD") %></span>
+        <% if(page.updated && page.updated != page.date) { %>
+        <span class="post-updated">更新于 <%= date(page.updated, "YYYY-MM-DD") %></span>
+        <% } %>
+        <% if(page.categories && page.categories.length) { %>
+        <span class="post-categories">
+            分类: 
+            <% page.categories.forEach(function(category, i){ %>
+                <a href="<%= url_for(category.path) %>"><%= category.name %></a><%= i < page.categories.length-1 ? ',' : '' %>
+            <% }) %>
+        </span>
+        <% } %>
+    </div>
+    
+    <div class="post-content-main">
+        <%- page.content %>
+    </div>
+    
+    <% if(page.tags && page.tags.length) { %>
+    <div class="post-tags">
+        标签: 
+        <% page.tags.forEach(function(tag, i){ %>
+            <a href="<%= url_for(tag.path) %>">#<%= tag.name %></a>
+        <% }) %>
+    </div>
+    <% } %>
+</article>
+
+<% if (page.prev || page.next) { %>
+<div class="post-navigation">
+    <% if (page.prev) { %>
+    <a href="<%= url_for(page.prev.path) %>" class="prev-post">
+        <span>上一篇</span>
+        <p><%= page.prev.title %></p>
+    </a>
+    <% } %>
+    
+    <% if (page.next) { %>
+    <a href="<%= url_for(page.next.path) %>" class="next-post">
+        <span>下一篇</span>
+        <p><%= page.next.title %></p>
+    </a>
+    <% } %>
+</div>
+<% } %> 

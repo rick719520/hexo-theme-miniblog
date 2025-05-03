@@ -1,0 +1,28 @@
+# MiniBlog主题配置文件
+
+# 菜单配置
+menu:
+  首页: /
+  归档: /archives
+  关于: /about
+
+# 侧边栏设置
+sidebar:
+  enable: true
+
+# 头像
+avatar: /images/avatar.svg
+
+# 社交链接
+social:
+  github:
+  twitter:
+  facebook:
+  instagram:
+  linkedin:
+
+# 页脚文本
+footer_text: '&copy; 2020-2025 719520.xyz 保留所有权利.'
+
+# 主题样式设置
+theme_color: default 

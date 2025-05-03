@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><% if (page.title) { %><%= page.title %> - <% } %><%= config.title %></title>
+    <meta name="description" content="<% if (page.description) { %><%= page.description %><% } else { %><%= config.description %><% } %>">
+    <link rel="stylesheet" href="/css/style.css">
+    <% if (theme.favicon) { %>
+    <link rel="shortcut icon" href="<%= theme.favicon %>">
+    <% } %>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <% for (let name in theme.menu) { %>
+                <li><a href="<%= theme.menu[name] %>"><%= name %></a></li>
+                <% } %>
+                <li>
+                    <button id="theme-toggle" aria-label="切换主题">
+                        <span class="theme-icon">🌓</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <main>
+            <%- body %>
+        </main>
+
+        <% if (theme.sidebar && theme.sidebar.enable) { %>
+        <aside class="sidebar">
+            <!-- 作者信息 -->
+            <div class="sidebar-widget author">
+                <img src="<%= theme.avatar %>" alt="作者头像" class="author-avatar">
+                <h3 class="author-name"><%= config.author %></h3>
+                <p class="author-bio"><%= config.bio || '博主的个人简介' %></p>
+            </div>
+
+            <!-- 文章分类 -->
+            <div class="sidebar-widget">
+                <h3>文章分类</h3>
+                <ul class="categories-list">
+                    <% site.categories.sort('name').forEach(function(category){ %>
+                    <li><a href="<%= url_for(category.path) %>"><%= category.name %> <span class="count"><%= category.posts.length %></span></a></li>
+                    <% }) %>
+                </ul>
+            </div>
+
+            <!-- 标签云 -->
+            <div class="sidebar-widget">
+                <h3>标签云</h3>
+                <ul class="tags-list">
+                    <% site.tags.sort('name').forEach(function(tag){ %>
+                    <li><a href="<%= url_for(tag.path) %>"><%= tag.name %></a></li>
+                    <% }) %>
+                </ul>
+            </div>
+        </aside>
+        <% } %>
+    </div>
+    
+    <footer>
+        <p><%- theme.footer_text %></p>
+    </footer>
+    
+    <script src="/js/main.js"></script>
+    <script src="/js/image-resize.js"></script>
+    <script src="/js/context-menu.js"></script>
+</body>
+</html> 
